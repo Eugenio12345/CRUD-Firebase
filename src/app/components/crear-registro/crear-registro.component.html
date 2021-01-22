@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrado de datos</title>
+</head>
+<body>
+    <app-header-top></app-header-top>
+    <form  [formGroup]="registroForm" (ngSubmit)="guardarUsuario(registroForm.value)"  >
+
+        <div  class="col">
+            <label for="exampleInputPassword1">Nomre de Usuario</label>
+            <input style="width: 300px;" type="text" class="form-control" id="nombreUsuario" placeholder="Ingresar Usuario" formControlName="nombreUsuario" ng-model="nombreUsuario">
+          </div>
+    
+        <div class="col">
+          <label for="exampleInputEmail1">Correo Electronico</label>
+          <input  style="width: 300px;" type="email" class="form-control" id="correoElectronico" aria-describedby="emailHelp" placeholder="Ingresar Correo" formControlName="correoElectronico" ng-model="correoElectronico" >
+          
+        </div>
+        <div  class="col">
+          <label for="exampleInputPassword1">Fecha de nacimiento</label>
+          <input style="width: 300px;" type="date" class="form-control" id="annioNacimiento" placeholder="dd/mm/aaaa" formControlName="annioNacimiento" ng-model="annioNacimiento" >
+        </div>
+          <div  class="col">
+            <label for="exampleInputPassword1">Password</label>
+            <input style="width: 300px;" type="password" class="form-control" id="password" placeholder="Ingresar contraseña"  formControlName="password" ng-model="password" >
+          </div>
+         <br>
+        <button style="margin-left: 10px;" type="submit" class="btn btn-primary">Capturar</button>
+      </form>
+</body>
+</html>
