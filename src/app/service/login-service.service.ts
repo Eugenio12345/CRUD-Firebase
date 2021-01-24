@@ -13,8 +13,8 @@ export class LoginService {
   urlGuardarUsuario = '/api/usuarios/crear/registro';
   urlConsultarUsuario = '/api/usuarios/obtener/registros';
   urlEliminar = '/api/usuarios/eliminar/registro/';
-  urlValidarUsuario = '/api/usuarios/valida/existencia';
-  
+  urlObtenerUsuarioId = '/api/usuarios/obtener/registro/';
+  urlEditarUsuario = '/api/usuarios/actualizar/registro';
   
   constructor(protected http: HttpClient) { }
 
@@ -38,4 +38,13 @@ export class LoginService {
   return this.http.delete(this.urlGlobal+this.urlEliminar+idUser, this.httpOptions);
 }
 
+  obtenerUsuarioPorId(idUsuario): Observable<Usuario>{
+    return this.http.get<Usuario>(this.urlGlobal+this.urlObtenerUsuarioId+idUsuario,this.httpOptions);
+  }
+
+  editarUsuario(usuario){
+    return this.http.put(this.urlGlobal+this.urlEditarUsuario, usuario, this.httpOptions);
+  }
+
+  
 }

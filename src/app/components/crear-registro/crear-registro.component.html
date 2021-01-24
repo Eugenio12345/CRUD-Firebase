@@ -7,17 +7,17 @@
 </head>
 <body>
     <app-header-top></app-header-top>
+    <br>
+    <h3>Crear nuevo usuario</h3>
     <form  [formGroup]="registroForm" (ngSubmit)="guardarUsuario(registroForm.value)"  >
 
         <div  class="col">
             <label for="exampleInputPassword1">Nomre de Usuario</label>
             <input style="width: 300px;" type="text" class="form-control" id="nombreUsuario" placeholder="Ingresar Usuario" formControlName="nombreUsuario" ng-model="nombreUsuario">
           </div>
-    
         <div class="col">
           <label for="exampleInputEmail1">Correo Electronico</label>
           <input  style="width: 300px;" type="email" class="form-control" id="correoElectronico" aria-describedby="emailHelp" placeholder="Ingresar Correo" formControlName="correoElectronico" ng-model="correoElectronico" >
-          
         </div>
         <div  class="col">
           <label for="exampleInputPassword1">Fecha de nacimiento</label>
