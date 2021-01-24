@@ -19,6 +19,7 @@ export class MostrarUsuariosComponent implements OnInit {
   correoElectronico: String;
   annioNacimiento: String;
   password: String;
+  idUsuario: number;
 
   closeResult = '';
   columnas = ["Id Usuario","Nombre de usuario  "," Correo Electronico","Año de nacimiento", "Operaciones"];
@@ -30,6 +31,7 @@ export class MostrarUsuariosComponent implements OnInit {
       correoElectronico: '',
       annioNacimiento:'',
       password: '',
+      idUsuario: ''
     })
   }
  
@@ -46,7 +48,17 @@ export class MostrarUsuariosComponent implements OnInit {
    }
 
    actualizarUsuario(usuario){
-     console.log(usuario.nombreUsuario);
+     usuario.idUsuario = this.idUsuario;
+     usuario.nombreUsuario = usuario.nombreUsuario == '' ? this.nombreUsuario : usuario.nombreUsuario;
+     usuario.correoElectronico = usuario.correoElectronico == ''? this.correoElectronico: usuario.correoElectronico;
+     usuario.annioNacimiento = usuario.annioNacimiento == ''? this.annioNacimiento : usuario.annioNacimiento;
+     usuario.password = usuario.password == ''? this.password : usuario.password;
+
+     this.loginService.editarUsuario(usuario).subscribe(response=>{
+       this.ngOnInit();
+     });
+
+    
    }
 
 
@@ -68,12 +80,13 @@ export class MostrarUsuariosComponent implements OnInit {
     this.loginService.obtenerUsuarioPorId(id).subscribe(result=> 
       {
         this.usuarioEditar = result;
+        this.idUsuario = this.usuarioEditar.idUsuario;
         this.nombreUsuario = this.usuarioEditar.nombreUsuario;
         this.correoElectronico =  this.usuarioEditar.correoElectronico;
         this.password = this.usuarioEditar.password;
         this.annioNacimiento = this.usuarioEditar.annioNacimiento;
       }, error=>{
-        
+         
       })
 
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {

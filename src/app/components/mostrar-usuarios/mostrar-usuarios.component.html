@@ -34,23 +34,26 @@
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
-    
     <form [formGroup]="formCustomerUpdate" (ngSubmit)="actualizarUsuario(formCustomerUpdate.value)">
       <div class="form-group" style="margin-left: 2%; margin-right: 2%;">
         <label for="exampleInputEmail1">Nombre Usuario </label>
-        <input style="width: 300px;" type="email" class="form-control" id="name" aria-describedby="emailHelp" placeholder="{{nombreUsuario}}" value="{{nombreUsuario}}"  formControlName="nombreUsuario" ng-model="nombreUsuario"  >
+        <input style="width: 300px;" type="email" class="form-control" id="idUsuario" aria-describedby="emailHelp" placeholder="{{idUsuario}}" value="{{idUsuario}}"  formControlName="nombreUsuario" ng-model="idUsuario" >
+      </div>
+      <div class="form-group" style="margin-left: 2%; margin-right: 2%;">
+        <label for="exampleInputEmail1">Nombre Usuario </label>
+        <input style="width: 300px;" type="email" class="form-control" id="nombreUsuario" aria-describedby="emailHelp" placeholder="{{nombreUsuario}}" value="{{nombreUsuario}}"  formControlName="nombreUsuario" ng-model="nombreUsuario"  >
       </div>
       <div class="form-group" style="margin-left: 2%; margin-right: 2%;">
         <label for="exampleInputEmail1">Correo Electronico</label>
-        <input style="width: 300px;" type="email" class="form-control" id="lastName" aria-describedby="emailHelp" placeholder="{{correoElectronico}}"  value="{{correoElectronico}}" formControlName="correoElectronico" ng-model="correoElectronico" >
+        <input style="width: 300px;" type="email" class="form-control" id="correoElectronico" aria-describedby="emailHelp" placeholder="{{correoElectronico}}"  value="{{correoElectronico}}" formControlName="correoElectronico" ng-model="correoElectronico" >
       </div>
       <div class="form-group" style="margin-left: 2%; margin-right: 2%;">
         <label for="exampleInputEmail1">Fecha Nacimiento</label>
-        <input style="width: 300px;" type="email" class="form-control" id="business" aria-describedby="emailHelp" placeholder="{{annioNacimiento}}" value="{{annioNacimiento}}"  formControlName="annioNacimiento" ng-model="annioNacimiento"  >
+        <input style="width: 300px;" type="email" class="form-control" id="annioNacimiento" aria-describedby="emailHelp" placeholder="{{annioNacimiento}}" value="{{annioNacimiento}}"  formControlName="annioNacimiento" ng-model="annioNacimiento"  >
       </div>
       <div class="form-group" style="margin-left: 2%; margin-right: 2%;">
         <label for="exampleInputEmail1">Password</label>
-        <input style="width: 300px;" type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Password" value="{{password}}"  formControlName="password" ng-model="password">
+        <input style="width: 300px;" type="email" class="form-control" id="password" aria-describedby="emailHelp" placeholder="Password" value="{{password}}"  formControlName="password" ng-model="password">
       </div>
       <button type="submit"  class="btn btn-primary" style="margin-left: 2%; margin-bottom: 3%;" (click)="modal.close('Close click')" >Actualizar</button>
     </form>
