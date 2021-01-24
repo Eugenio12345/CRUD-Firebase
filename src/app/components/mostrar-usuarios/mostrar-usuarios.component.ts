@@ -53,14 +53,10 @@ export class MostrarUsuariosComponent implements OnInit {
      usuario.correoElectronico = usuario.correoElectronico == ''? this.correoElectronico: usuario.correoElectronico;
      usuario.annioNacimiento = usuario.annioNacimiento == ''? this.annioNacimiento : usuario.annioNacimiento;
      usuario.password = usuario.password == ''? this.password : usuario.password;
-
      this.loginService.editarUsuario(usuario).subscribe(response=>{
        this.ngOnInit();
      });
-
-    
    }
-
 
    eliminarDatos(idUser: number){
      console.log('El id del Elemto es:  '+idUser)
@@ -77,6 +73,15 @@ export class MostrarUsuariosComponent implements OnInit {
    
     
   openWindowCustomClass(content, id) {
+    this.mostrarPorId(id);
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+  
+  mostrarPorId(id){
     this.loginService.obtenerUsuarioPorId(id).subscribe(result=> 
       {
         this.usuarioEditar = result;
@@ -86,16 +91,10 @@ export class MostrarUsuariosComponent implements OnInit {
         this.password = this.usuarioEditar.password;
         this.annioNacimiento = this.usuarioEditar.annioNacimiento;
       }, error=>{
-         
+         console.log('error inesperado ');  
       })
-
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
   }
-
+  
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
       return 'by pressing ESC';

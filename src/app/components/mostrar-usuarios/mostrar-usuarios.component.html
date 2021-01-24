@@ -16,12 +16,13 @@
       <tbody style="opacity: 80%;">
         <tr *ngFor="let usuario of usuarios ">
           <td>{{usuario.idUsuario}}</td>
-          <td>{{usuario.nombreUsuario}}</td>
+          <td><a  (click)="openWindowCustomClass(contentDetail, usuario.idUsuario)"> {{usuario.nombreUsuario}}</a></td>
           <td>{{usuario.correoElectronico}}</td>
           <td>{{usuario.annioNacimiento}}</td>
           <td>
             <a class="btn btn-outline-danger" href="/mostrar-usuarios"  (click)="eliminarDatos(usuario.idUsuario)">Eliminar</a>
-            <p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" ><span class="glyphicon glyphicon-pencil" (click)="openWindowCustomClass(content, usuario.idUsuario)">Editar</span></button></p>
+            <a class="btn btn-outline-primary"  (click)="openWindowCustomClass(content, usuario.idUsuario)"> Editar</a>
+            
           </td>
         </tr>
       </tbody>
@@ -37,10 +38,6 @@
     <form [formGroup]="formCustomerUpdate" (ngSubmit)="actualizarUsuario(formCustomerUpdate.value)">
       <div class="form-group" style="margin-left: 2%; margin-right: 2%;">
         <label for="exampleInputEmail1">Nombre Usuario </label>
-        <input style="width: 300px;" type="email" class="form-control" id="idUsuario" aria-describedby="emailHelp" placeholder="{{idUsuario}}" value="{{idUsuario}}"  formControlName="nombreUsuario" ng-model="idUsuario" >
-      </div>
-      <div class="form-group" style="margin-left: 2%; margin-right: 2%;">
-        <label for="exampleInputEmail1">Nombre Usuario </label>
         <input style="width: 300px;" type="email" class="form-control" id="nombreUsuario" aria-describedby="emailHelp" placeholder="{{nombreUsuario}}" value="{{nombreUsuario}}"  formControlName="nombreUsuario" ng-model="nombreUsuario"  >
       </div>
       <div class="form-group" style="margin-left: 2%; margin-right: 2%;">
@@ -49,12 +46,32 @@
       </div>
       <div class="form-group" style="margin-left: 2%; margin-right: 2%;">
         <label for="exampleInputEmail1">Fecha Nacimiento</label>
-        <input style="width: 300px;" type="email" class="form-control" id="annioNacimiento" aria-describedby="emailHelp" placeholder="{{annioNacimiento}}" value="{{annioNacimiento}}"  formControlName="annioNacimiento" ng-model="annioNacimiento"  >
+        <input style="width: 300px;" type="date" class="form-control" id="annioNacimiento" aria-describedby="emailHelp" placeholder="{{annioNacimiento}}" value="{{annioNacimiento}}"  formControlName="annioNacimiento" ng-model="annioNacimiento"  >
       </div>
       <div class="form-group" style="margin-left: 2%; margin-right: 2%;">
         <label for="exampleInputEmail1">Password</label>
         <input style="width: 300px;" type="email" class="form-control" id="password" aria-describedby="emailHelp" placeholder="Password" value="{{password}}"  formControlName="password" ng-model="password">
       </div>
       <button type="submit"  class="btn btn-primary" style="margin-left: 2%; margin-bottom: 3%;" (click)="modal.close('Close click')" >Actualizar</button>
+    </form>
+  </ng-template>
+
+  <ng-template #contentDetail let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">Detalle del  Usuario </h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <form [formGroup]="formCustomerUpdate" (ngSubmit)="actualizarUsuario(formCustomerUpdate.value)">
+      <div class="form-group" style="margin-left: 2%; margin-right: 2%;">
+        <label for="exampleInputEmail1"><h5>Nombre Usuario: </h5> {{nombreUsuario}} </label>
+      </div>
+      <div class="form-group" style="margin-left: 2%; margin-right: 2%;">
+        <label for="exampleInputEmail1"><h5>Correo Electronico: </h5> {{correoElectronico}}</label>
+      </div>
+      <div class="form-group" style="margin-left: 2%; margin-right: 2%;">
+        <label for="exampleInputEmail1"><h5>Fecha Nacimiento: </h5> {{annioNacimiento}}</label>
+      </div>
     </form>
   </ng-template>
