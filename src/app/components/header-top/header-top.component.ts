@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header-top',
@@ -7,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderTopComponent implements OnInit {
 
-  constructor() { }
+  constructor(private afAuth: AngularFireAuth,  private router: Router) { }
 
   ngOnInit(): void {
+     
   }
 
+ 
+  deleteSession(){
+    this.afAuth.signOut().then(() => {
+      this.router.navigate(['/login']);
+    }).catch();
+  }
 }

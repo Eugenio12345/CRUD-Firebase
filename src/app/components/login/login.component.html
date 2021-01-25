@@ -1,13 +1,27 @@
-<form >
-    <div class="col">
-      <label for="exampleInputEmail1">Correo Electronico</label>
-      <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Ingresar Correo">
-      
-    </div>
-    <div  class="col">
-      <label for="exampleInputPassword1">contraseña</label>
-      <input type="password" class="form-control" id="password" placeholder="Ingresar contraseña">
-    </div>
+<app-header-login></app-header-login>
+<div class="example-container" >
   
-    <button type="submit" class="btn btn-primary">Ingresar</button>
+  <form [formGroup]="loginForm" style="align-content: center; margin-left: 600px;" >
+    <h3>Login Usuario</h3><br>
+    <div class="form-group">
+      <label for="title"><h5>Correo Electronico:</h5></label>
+      <input type="text" id="email" placeholder="email" class="form-control" formControlName="email" />
+    </div>
+    <div class="form-group">
+      <label for="description"><h5>Contraseña</h5></label>
+      <input id="password" type="password" placeholder="Password" class="form-control" formControlName="password" />
+    </div>
+
+    <div class="buttons-container center">
+      <button class="btn btn-primary" (click)="ingresar()">
+        Ingresar
+      </button>
+      <button class="btn btn-success" (click)="crearCuenta()">
+        Crear Cuenta
+      </button>
+    </div>
   </form>
+  <ng-container *ngIf="errorMessage" >
+    <span class="error">{{errorMessage}}</span>
+  </ng-container>
+ </div>
