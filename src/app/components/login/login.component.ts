@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private ngZone: NgZone) {
     this.loginForm = this.fb.group({
-        email: '',
+        correoElectronico: '',
         password: ''
       })
    }
@@ -36,11 +36,10 @@ export class LoginComponent implements OnInit {
 
   crearCuenta() {
     this.router.navigate(['/crear-registro']);
-    
   }
  
   ingresar() { 
-    this.afAuth.signInWithEmailAndPassword(this.loginForm.value.email, this.loginForm.value.password).then(() => {
+    this.afAuth.signInWithEmailAndPassword(this.loginForm.value.correoElectronico, this.loginForm.value.password).then(() => {
       this.router.navigate(['/mostrar-usuarios']);
     }).catch(response => {
       this.errorMessage = 'Error de autenticacion';

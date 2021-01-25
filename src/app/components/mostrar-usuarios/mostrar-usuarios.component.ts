@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import {LoginService} from '../../service/login-service.service';
 import {Router} from '@angular/router';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Usuario } from '../modelo/Usuario';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-mostrar-usuarios',
@@ -25,7 +26,13 @@ export class MostrarUsuariosComponent implements OnInit {
   columnas = ["Id Usuario","Nombre de usuario  "," Correo Electronico","Año de nacimiento", "Operaciones"];
    public usuarios = [];
    
-  constructor(private loginService : LoginService, private router: Router, private modalService: NgbModal, private patterBuilder: FormBuilder){
+  constructor(private loginService : LoginService, 
+              private router: Router, 
+              private modalService: NgbModal, 
+              private patterBuilder: FormBuilder,
+              private afAuth: AngularFireAuth,
+              private ngZone: NgZone
+              ){
     this.formCustomerUpdate = this.patterBuilder.group({
       nombreUsuario: '',
       correoElectronico: '',
@@ -37,14 +44,26 @@ export class MostrarUsuariosComponent implements OnInit {
  
 
    ngOnInit() {
-     this.loginService.obtenerUsuarios().subscribe(
-       resultado=>{
-          this.usuarios=resultado;
-       }, 
-       error=>{
-         console.log(error);
-       }
-     );
+    this.afAuth.user.subscribe(user => {
+      if (!user) {
+          this.ngZone.run(()=>{
+          this.router.navigate(['/login']);
+          })
+        }else{
+          this.mostrarUsuarios();
+        }
+      });
+   }
+
+   mostrarUsuarios(){
+    this.loginService.obtenerUsuarios().subscribe(
+      resultado=>{
+         this.usuarios=resultado;
+      }, 
+      error=>{
+        console.log(error);
+      }
+    );
    }
 
    actualizarUsuario(usuario){
